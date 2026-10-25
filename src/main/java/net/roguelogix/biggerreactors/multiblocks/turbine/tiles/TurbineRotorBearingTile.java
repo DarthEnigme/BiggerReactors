@@ -61,7 +61,7 @@ public class TurbineRotorBearingTile extends TurbineBaseTile implements IEventMu
             nbt.putDouble("speed", controller().simulation().RPM());
             if (sendFullUpdate < Phosphophyllite.tickNumber()) {
                 sendFullUpdate = Long.MAX_VALUE;
-                nbt.put("config", getUpdateTag());
+                nbt.put("config", getUpdateTag(level.registryAccess()));
             }
         }
         return nbt;
@@ -72,7 +72,7 @@ public class TurbineRotorBearingTile extends TurbineBaseTile implements IEventMu
         if (getBlockState().getValue(ASSEMBLED) && nbt.contains("speed")) {
             speed = nbt.getDouble("speed");
             if (nbt.contains("config")) {
-                handleUpdateTag(nbt.getCompound("config"));
+                handleUpdateTag(nbt.getCompound("config"), level.registryAccess());
             }
 //            if (rotationAxis != null) {
 //                teardownQuartzModel();

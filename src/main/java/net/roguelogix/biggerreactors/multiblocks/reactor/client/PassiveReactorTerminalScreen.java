@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class PassiveReactorTerminalScreen extends PhosphophylliteScreen<ReactorTerminalContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/reactor_terminal_passive.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/reactor_terminal_passive.png");
 
     private ReactorState reactorState;
 

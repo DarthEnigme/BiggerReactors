@@ -1,0 +1,46 @@
+modLoader="javafml"
+loaderVersion="[${loader_version},)"
+license="LGPL v2.1"
+issueTrackerURL="https://github.com/BiggerSeries/BiggerReactors/issues/"
+
+[[mods]] 
+modId="biggerreactors" 
+version="${version}" 
+displayName="Bigger Reactors" 
+displayURL="https://biggerseries.net/" 
+logoFile="biggerreactors.png"
+credits="ErogeneousBeef for the original Big Reactors mod, that this is spiritually (and semi-literally) derived from"
+authors="RogueLogix, gizmocodes, Ridanisaurus" 
+description='''
+Big Reactors, but even bigger
+
+Part of the BiggerSeries of mods
+
+Official continuation of Big Reactors
+'''
+
+[[dependencies.biggerreactors]] 
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.biggerreactors]]
+    modId="minecraft"
+    type="required"
+    versionRange="[${minecraft_version}]"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.biggerreactors]]
+    modId="phosphophyllite"
+    type="required"
+    versionRange="${phos_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.biggerreactors]]
+    modId="quartz"
+    type="required"
+    versionRange="${quartz_version_range}"
+    ordering="NONE"
+    side="BOTH"
+

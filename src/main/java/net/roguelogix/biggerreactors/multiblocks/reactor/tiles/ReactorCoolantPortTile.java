@@ -1,5 +1,6 @@
 package net.roguelogix.biggerreactors.multiblocks.reactor.tiles;
 
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -92,7 +93,7 @@ public class ReactorCoolantPortTile extends ReactorBaseTile implements IPhosphop
     
     @Nullable
     @Override
-    public CompoundTag fluidTagInTank(int tank) {
+    public DataComponentPatch fluidTagInTank(int tank) {
         if (transitionTank == null) {
             return null;
         }
@@ -116,7 +117,7 @@ public class ReactorCoolantPortTile extends ReactorBaseTile implements IPhosphop
     }
     
     @Override
-    public long fill(Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long fill(Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         if (transitionTank == null || direction != INLET) {
             return 0;
         }
@@ -124,7 +125,7 @@ public class ReactorCoolantPortTile extends ReactorBaseTile implements IPhosphop
     }
     
     @Override
-    public long drain(Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long drain(Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         if (transitionTank == null || direction == INLET) {
             return 0;
         }

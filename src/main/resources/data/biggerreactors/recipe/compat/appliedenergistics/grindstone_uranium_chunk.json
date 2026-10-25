@@ -1,0 +1,19 @@
+{
+  "type": "appliedenergistics2:grinder",
+  "neoforge:conditions": [
+    {
+      "modid": "appliedenergistics2",
+      "type": "neoforge:mod_loaded"
+    }
+  ],
+  "input": {
+    "item": "biggerreactors:uranium_chunk"
+  },
+  "result": {
+    "primary": {
+      "item": "biggerreactors:uranium_dust",
+      "count": 2
+    }
+  },
+  "turns": 8
+}

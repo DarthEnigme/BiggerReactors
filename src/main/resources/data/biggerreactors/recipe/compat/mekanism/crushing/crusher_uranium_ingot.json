@@ -1,0 +1,17 @@
+{
+  "type": "mekanism:crushing",
+  "neoforge:conditions": [
+    {
+      "modid": "mekanism",
+      "type": "neoforge:mod_loaded"
+    }
+  ],
+  "input": {
+    "count": 1,
+    "item": "biggerreactors:uranium_ingot"
+  },
+  "output": {
+    "count": 1,
+    "id": "biggerreactors:uranium_dust"
+  }
+}

@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class ReactorRedstonePortScreen extends PhosphophylliteScreen<ReactorRedstonePortContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/reactor_redstone_port.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/reactor_redstone_port.png");
 
     private static final String[] INPUT_TRANSLATIONS = new String[]{
             "screen.biggerreactors.reactor_redstone_port.input_reactor_activity",

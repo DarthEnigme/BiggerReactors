@@ -31,7 +31,7 @@ public class BiggerReactorsJEIPlugin implements IModPlugin {
 
     @Nonnull
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(BiggerReactors.modid, "jei_plugin");
+        return ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "jei_plugin");
     }
 
     @Override
@@ -68,7 +68,7 @@ public class BiggerReactorsJEIPlugin implements IModPlugin {
         ReactorModeratorRegistry.Client.forEach((block, moderatorProperties) -> {
             if (block instanceof LiquidBlock) {
                 LiquidBlock fluidBlock = (LiquidBlock) block;
-                FluidStack stack = new FluidStack(fluidBlock.getFluid(), 1000);
+                FluidStack stack = new FluidStack(fluidBlock.fluid, 1000);
                 fluidModeratorRecipes.add(new FluidModeratorCategory.Recipe(stack, moderatorProperties));
             } else if (!(block instanceof AirBlock)) {
                 ItemStack stack = new ItemStack(block.asItem());

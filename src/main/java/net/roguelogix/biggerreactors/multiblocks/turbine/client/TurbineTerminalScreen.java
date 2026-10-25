@@ -32,7 +32,7 @@ import java.util.Objects;
 
 public class TurbineTerminalScreen extends PhosphophylliteScreen<TurbineTerminalContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/turbine_terminal.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/turbine_terminal.png");
 
     private TurbineState turbineState;
 
@@ -44,8 +44,8 @@ public class TurbineTerminalScreen extends PhosphophylliteScreen<TurbineTerminal
 
         // Initialize turbine state.
         turbineState = (TurbineState) this.getMenu().getGuiPacket();
-        intakeFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(turbineState.intakeResourceLocation));
-        exhaustFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(turbineState.exhaustResourceLocation));
+        intakeFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(turbineState.intakeResourceLocation));
+        exhaustFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(turbineState.exhaustResourceLocation));
     }
 
     /**
@@ -280,11 +280,11 @@ public class TurbineTerminalScreen extends PhosphophylliteScreen<TurbineTerminal
         super.containerTick();
         // Check if intake type changed.
         if (!turbineState.intakeResourceLocation.equals(Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(intakeFluid)).toString())) {
-            intakeFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(turbineState.intakeResourceLocation));
+            intakeFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(turbineState.intakeResourceLocation));
         }
         // Check if exhaust type changed.
         if (!turbineState.exhaustResourceLocation.equals(Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(exhaustFluid)).toString())) {
-            exhaustFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(turbineState.exhaustResourceLocation));
+            exhaustFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(turbineState.exhaustResourceLocation));
         }
     }
 

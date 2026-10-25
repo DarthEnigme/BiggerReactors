@@ -25,12 +25,12 @@ public class CoilCategory implements IRecipeCategory<CoilCategory.Recipe> {
 
     private final IDrawable background;
     private final IDrawable icon;
-    public static final ResourceLocation UID = new ResourceLocation(BiggerReactors.modid, "classic/turbine_coil");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "classic/turbine_coil");
     public static final RecipeType<Recipe> RECIPE_TYPE = new RecipeType<>(UID, Recipe.class);
 
     public CoilCategory(IGuiHelper guiHelper) {
         icon = guiHelper.createDrawableItemStack(new ItemStack(TurbineTerminal.INSTANCE));
-        background = guiHelper.createDrawable(new ResourceLocation(BiggerReactors.modid, "textures/jei/common.png"), 0, 6, 144, 34);
+        background = guiHelper.createDrawable(ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/jei/common.png"), 0, 6, 144, 34);
     }
     
     @Override

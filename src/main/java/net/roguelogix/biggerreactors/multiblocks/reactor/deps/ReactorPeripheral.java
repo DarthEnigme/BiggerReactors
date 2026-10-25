@@ -1,6 +1,6 @@
 package net.roguelogix.biggerreactors.multiblocks.reactor.deps;
 
-import cpw.mods.modlauncher.api.LamdbaExceptionUtils;
+import net.roguelogix.phosphophyllite.util.LamdbaExceptionUtils;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IPeripheral;

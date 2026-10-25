@@ -1,6 +1,6 @@
 {
     type: "fluidtag",
-    location: "forge:ender",
+    location: "c:ender",
     absorption: 0.9,
     efficiency: 0.75,
     moderation: 2.0,

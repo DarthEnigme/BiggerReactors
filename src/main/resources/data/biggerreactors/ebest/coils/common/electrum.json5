@@ -1,6 +1,6 @@
 {
     type: "tag",
-    location: "forge:storage_blocks/electrum",
+    location: "c:storage_blocks/electrum",
     efficiency: 0.825,
     extractionRate: 0.2,
     bonus: 1,

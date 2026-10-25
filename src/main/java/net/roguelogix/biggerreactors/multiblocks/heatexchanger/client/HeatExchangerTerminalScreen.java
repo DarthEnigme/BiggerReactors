@@ -27,7 +27,7 @@ import java.util.Objects;
 @OnlyIn(Dist.CLIENT)
 public class HeatExchangerTerminalScreen extends PhosphophylliteScreen<HeatExchangerTerminalContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/heat_exchanger_terminal.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/heat_exchanger_terminal.png");
 
     private HeatExchangerState heatExchangerState;
 
@@ -41,10 +41,10 @@ public class HeatExchangerTerminalScreen extends PhosphophylliteScreen<HeatExcha
 
         // Initialize heat exchanger state.
         this.heatExchangerState = (HeatExchangerState) this.getMenu().getGuiPacket();
-        this.condenserIntakeFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(this.heatExchangerState.condenserIntakeFluid));
-        this.condenserExhaustFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(this.heatExchangerState.condenserExhaustFluid));
-        this.evaporatorIntakeFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(this.heatExchangerState.evaporatorIntakeFluid));
-        this.evaporatorExhaustFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(this.heatExchangerState.evaporatorExhaustFluid));
+        this.condenserIntakeFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(this.heatExchangerState.condenserIntakeFluid));
+        this.condenserExhaustFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(this.heatExchangerState.condenserExhaustFluid));
+        this.evaporatorIntakeFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(this.heatExchangerState.evaporatorIntakeFluid));
+        this.evaporatorExhaustFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(this.heatExchangerState.evaporatorExhaustFluid));
     }
 
     /**
@@ -145,22 +145,22 @@ public class HeatExchangerTerminalScreen extends PhosphophylliteScreen<HeatExcha
     public void containerTick() {
         // Check if condenser intake fluid changed.
         if (!heatExchangerState.condenserIntakeFluid.equals(Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(condenserIntakeFluid)).toString())) {
-            condenserIntakeFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(heatExchangerState.condenserIntakeFluid));
+            condenserIntakeFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(heatExchangerState.condenserIntakeFluid));
         }
 
         // Check if evaporator intake fluid changed.
         if (!heatExchangerState.evaporatorIntakeFluid.equals(Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(evaporatorIntakeFluid)).toString())) {
-            evaporatorIntakeFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(heatExchangerState.evaporatorIntakeFluid));
+            evaporatorIntakeFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(heatExchangerState.evaporatorIntakeFluid));
         }
 
         // Check if condenser exhaust fluid changed.
         if (!heatExchangerState.condenserExhaustFluid.equals(Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(condenserExhaustFluid)).toString())) {
-            condenserExhaustFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(heatExchangerState.condenserExhaustFluid));
+            condenserExhaustFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(heatExchangerState.condenserExhaustFluid));
         }
 
         // Check if evaporator exhaust fluid changed.
         if (!heatExchangerState.evaporatorExhaustFluid.equals(Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(evaporatorExhaustFluid)).toString())) {
-            evaporatorExhaustFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(heatExchangerState.evaporatorExhaustFluid));
+            evaporatorExhaustFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(heatExchangerState.evaporatorExhaustFluid));
         }
     }
 

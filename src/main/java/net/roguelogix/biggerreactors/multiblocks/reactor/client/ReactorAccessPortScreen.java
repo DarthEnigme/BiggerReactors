@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class ReactorAccessPortScreen extends PhosphophylliteScreen<ReactorAccessPortContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/reactor_access_port.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/reactor_access_port.png");
 
     private ReactorAccessPortState reactorAccessPortState;
 

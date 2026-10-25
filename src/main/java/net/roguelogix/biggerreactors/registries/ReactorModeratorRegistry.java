@@ -127,7 +127,7 @@ public class ReactorModeratorRegistry {
         RegistryType type = RegistryType.tag;
     
         @ConfigValue
-        ResourceLocation location = new ResourceLocation("dirt");
+        ResourceLocation location = ResourceLocation.parse("dirt");
     
         @ConfigValue(range = "[0, 1]")
         double absorption;
@@ -148,7 +148,7 @@ public class ReactorModeratorRegistry {
         BiggerReactors.LOGGER.info("Loading reactor moderators");
         registry.clear();
         
-        List<ReactorModeratorJsonData> data = dataLoader.loadAll(new ResourceLocation("biggerreactors:ebcr/moderators"));
+        List<ReactorModeratorJsonData> data = dataLoader.loadAll(ResourceLocation.parse("biggerreactors:ebcr/moderators"));
         BiggerReactors.LOGGER.info("Loaded " + data.size() + " moderator data entries");
         
         for (ReactorModeratorJsonData moderatorData : data) {
@@ -197,7 +197,7 @@ public class ReactorModeratorRegistry {
     
     public static class Client {
         
-        private static final SimplePhosChannel CHANNEL = new SimplePhosChannel(new ResourceLocation(BiggerReactors.modid, "moderator_sync_channel"), Client::readSync, null);
+        private static final SimplePhosChannel CHANNEL = new SimplePhosChannel(ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "moderator_sync_channel"), Client::readSync, null);
         private static final ObjectOpenHashSet<Block> moderatorBlocks = new ObjectOpenHashSet<>();
         private static final Object2ObjectOpenHashMap<Block, ModeratorProperties> moderatorProperties = new Object2ObjectOpenHashMap<>();
         
@@ -256,7 +256,7 @@ public class ReactorModeratorRegistry {
             for (int i = 0; i < list.size(); i++) {
                 var blockLocation = list.get(i);
                 var properties = propertiesList.get(i);
-                final var block = BuiltInRegistries.BLOCK.get(new ResourceLocation(blockLocation));
+                final var block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockLocation));
                 if (block == null) {
                     return;
                 }
@@ -275,7 +275,7 @@ public class ReactorModeratorRegistry {
                     return;
                 }
             } else if (item instanceof BucketItem bucketItem) {
-                final var fluidBlock = bucketItem.getFluid().defaultFluidState().createLegacyBlock().getBlock();
+                final var fluidBlock = bucketItem.content.defaultFluidState().createLegacyBlock().getBlock();
                 if (fluidBlock.defaultBlockState().isAir() || !moderatorBlocks.contains(fluidBlock)) {
                     return;
                 }

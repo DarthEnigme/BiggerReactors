@@ -3,7 +3,7 @@ package net.roguelogix.biggerreactors.client;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import net.minecraft.SharedConstants;
+import net.minecraft.util.StringUtil;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -166,20 +166,19 @@ public class TextBox<T extends AbstractContainerMenu> extends InteractiveElement
 
         // Set up tessellator and buffer.
         Tesselator tessellator = Tesselator.getInstance();
-        BufferBuilder renderBuffer = tessellator.getBuilder();
         RenderHelper.setRenderColor(255.0F, 255.0F, 255.0F, 255.0F);
         // TODO: does this need replaced?
 //        RenderSystem.disableTexture();
 
         // Set positions.
-        renderBuffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        renderBuffer.vertex((cursorRenderPos + 1), (y + 3), 0.0D).endVertex();
-        renderBuffer.vertex(cursorRenderPos, (y + 3), 0.0D).endVertex();
-        renderBuffer.vertex(cursorRenderPos, (y + 13), 0.0D).endVertex();
-        renderBuffer.vertex((cursorRenderPos + 1), (y + 13), 0.0D).endVertex();
+        BufferBuilder renderBuffer = tessellator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+        renderBuffer.addVertex((cursorRenderPos + 1), (y + 3), 0.0F);
+        renderBuffer.addVertex(cursorRenderPos, (y + 3), 0.0F);
+        renderBuffer.addVertex(cursorRenderPos, (y + 13), 0.0F);
+        renderBuffer.addVertex((cursorRenderPos + 1), (y + 13), 0.0F);
 
         // Draw and reset.
-        tessellator.end();
+        BufferUploader.drawWithShader(renderBuffer.buildOrThrow());
 //        RenderSystem.enableTexture();
         RenderHelper.clearRenderColor();
     }
@@ -212,21 +211,20 @@ public class TextBox<T extends AbstractContainerMenu> extends InteractiveElement
 
         // Set up tessellator and buffer.
         Tesselator tessellator = Tesselator.getInstance();
-        BufferBuilder renderBuffer = tessellator.getBuilder();
         RenderHelper.setRenderColor(0.0F, 0.0F, 255.0F, 255.0F);
 //        RenderSystem.disableTexture();
         RenderSystem.enableColorLogicOp();
         RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
 
         // Set positions.
-        renderBuffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        renderBuffer.vertex(rightRenderPos, (y + 2), 0.0D).endVertex();
-        renderBuffer.vertex(leftRenderPos, (y + 2), 0.0D).endVertex();
-        renderBuffer.vertex(leftRenderPos, (y + 14), 0.0D).endVertex();
-        renderBuffer.vertex(rightRenderPos, (y + 14), 0.0D).endVertex();
+        BufferBuilder renderBuffer = tessellator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+        renderBuffer.addVertex(rightRenderPos, (y + 2), 0.0F);
+        renderBuffer.addVertex(leftRenderPos, (y + 2), 0.0F);
+        renderBuffer.addVertex(leftRenderPos, (y + 14), 0.0F);
+        renderBuffer.addVertex(rightRenderPos, (y + 14), 0.0F);
 
         // Draw and reset.
-        tessellator.end();
+        BufferUploader.drawWithShader(renderBuffer.buildOrThrow());
         RenderSystem.disableColorLogicOp();
 //        RenderSystem.enableTexture();
         RenderHelper.clearRenderColor();
@@ -610,7 +608,7 @@ public class TextBox<T extends AbstractContainerMenu> extends InteractiveElement
                 return;
             }
             // Filter out invalid characters.
-            String filteredText = SharedConstants.filterText(text);
+            String filteredText = StringUtil.filterText(text);
             // Append or insert the text (either at the end or in the middle).
             if (this.cursorPos >= this.textBuffer.length() || this.cursorPos < 0) {
                 this.textBuffer.append(filteredText);

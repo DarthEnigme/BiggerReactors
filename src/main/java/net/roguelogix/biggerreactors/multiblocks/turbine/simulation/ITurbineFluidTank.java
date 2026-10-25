@@ -2,10 +2,10 @@ package net.roguelogix.biggerreactors.multiblocks.turbine.simulation;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.roguelogix.biggerreactors.util.SimpleNBTSerializable;
 import net.roguelogix.phosphophyllite.fluids.IPhosphophylliteFluidHandler;
 
-public interface ITurbineFluidTank extends INBTSerializable<CompoundTag>, IPhosphophylliteFluidHandler {
+public interface ITurbineFluidTank extends SimpleNBTSerializable<CompoundTag>, IPhosphophylliteFluidHandler {
     default long perSideCapacity() {
         return getTankCapacity(0);
     }

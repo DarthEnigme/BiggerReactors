@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class ReactorCoolantPortScreen extends PhosphophylliteScreen<ReactorCoolantPortContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/reactor_coolant_port.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/reactor_coolant_port.png");
 
     private ReactorCoolantPortState reactorCoolantPortState;
 

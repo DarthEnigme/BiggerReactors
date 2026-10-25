@@ -1,11 +1,10 @@
 package net.roguelogix.biggerreactors;
 
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
 import net.roguelogix.biggerreactors.multiblocks.heatexchanger.client.HeatExchangerFluidPortScreen;
@@ -38,8 +37,10 @@ public class BiggerReactors {
     public static final boolean LOG_DEBUG = LOGGER.isDebugEnabled();
     
     public BiggerReactors() {
-        new Registry(new ReferenceArrayList<>(), ReferenceArrayList.of(new ResourceLocation(Phosphophyllite.modid, "creative_tab"), new ResourceLocation(Quartz.modid, "creative_tab")));
-        ModLoadingContext.get().getActiveContainer().getEventBus().addListener(this::onClientSetup);
+        new Registry(new ReferenceArrayList<>(), ReferenceArrayList.of(ResourceLocation.fromNamespaceAndPath(Phosphophyllite.modid, "creative_tab"), ResourceLocation.fromNamespaceAndPath(Quartz.modid, "creative_tab")));
+        if (FMLLoader.getDist().isClient()) {
+            ModLoadingContext.get().getActiveContainer().getEventBus().addListener(this::onRegisterMenuScreens);
+        }
         NeoForge.EVENT_BUS.addListener(this::onReloadData);
         version = FMLLoader.getLoadingModList().getModFileById(modid).versionString();
     }
@@ -50,28 +51,28 @@ public class BiggerReactors {
         FluidTransitionRegistry.loadRegistry();
     }
 
-    public void onClientSetup(final FMLClientSetupEvent e) {
+    public void onRegisterMenuScreens(final RegisterMenuScreensEvent e) {
         // TODO: 6/28/20 Registry.
         //  Since I already have the comment here, also need to do a capability registry. I have a somewhat dumb capability to register.
-//        MenuScreens.register(CyaniteReprocessorContainer.INSTANCE,
+//        e.register(CyaniteReprocessorContainer.INSTANCE,
 //                CyaniteReprocessorScreen::new);
-        MenuScreens.register(ReactorTerminalContainer.INSTANCE,
+        e.register(ReactorTerminalContainer.INSTANCE,
                 CommonReactorTerminalScreen::new);
-        MenuScreens.register(ReactorCoolantPortContainer.INSTANCE,
+        e.register(ReactorCoolantPortContainer.INSTANCE,
                 ReactorCoolantPortScreen::new);
-        MenuScreens.register(ReactorAccessPortContainer.INSTANCE,
+        e.register(ReactorAccessPortContainer.INSTANCE,
                 ReactorAccessPortScreen::new);
-        MenuScreens.register(ReactorControlRodContainer.INSTANCE,
+        e.register(ReactorControlRodContainer.INSTANCE,
                 ReactorControlRodScreen::new);
-        MenuScreens.register(ReactorRedstonePortContainer.INSTANCE,
+        e.register(ReactorRedstonePortContainer.INSTANCE,
                 ReactorRedstonePortScreen::new);
-        MenuScreens.register(TurbineTerminalContainer.INSTANCE,
+        e.register(TurbineTerminalContainer.INSTANCE,
                 TurbineTerminalScreen::new);
-        MenuScreens.register(TurbineFluidPortContainer.INSTANCE,
+        e.register(TurbineFluidPortContainer.INSTANCE,
                 TurbineFluidPortScreen::new);
-        MenuScreens.register(HeatExchangerTerminalContainer.INSTANCE,
+        e.register(HeatExchangerTerminalContainer.INSTANCE,
                 HeatExchangerTerminalScreen::new);
-        MenuScreens.register(HeatExchangerFluidPortContainer.INSTANCE,
+        e.register(HeatExchangerFluidPortContainer.INSTANCE,
                 HeatExchangerFluidPortScreen::new);
     }
     

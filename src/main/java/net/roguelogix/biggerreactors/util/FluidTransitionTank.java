@@ -1,12 +1,12 @@
 package net.roguelogix.biggerreactors.util;
 
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.roguelogix.biggerreactors.registries.FluidTransitionRegistry;
 import net.roguelogix.phosphophyllite.fluids.IPhosphophylliteFluidHandler;
 import net.roguelogix.phosphophyllite.util.HeatBody;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class FluidTransitionTank extends HeatBody implements IPhosphophylliteFluidHandler, INBTSerializable<CompoundTag> {
+public class FluidTransitionTank extends HeatBody implements IPhosphophylliteFluidHandler, SimpleNBTSerializable<CompoundTag> {
     
     public final boolean condenser;
     
@@ -66,7 +66,7 @@ public class FluidTransitionTank extends HeatBody implements IPhosphophylliteFlu
     
     @Nullable
     @Override
-    public CompoundTag fluidTagInTank(int tank) {
+    public DataComponentPatch fluidTagInTank(int tank) {
         return null;
     }
     
@@ -105,7 +105,7 @@ public class FluidTransitionTank extends HeatBody implements IPhosphophylliteFlu
     }
     
     @Override
-    public long fill(@Nonnull Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long fill(@Nonnull Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         if (tag != null) {
             return 0;
         }
@@ -145,7 +145,7 @@ public class FluidTransitionTank extends HeatBody implements IPhosphophylliteFlu
     }
     
     @Override
-    public long drain(@Nonnull Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long drain(@Nonnull Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         if (activeTransition == null || tag != null) {
             return 0;
         }
@@ -244,7 +244,7 @@ public class FluidTransitionTank extends HeatBody implements IPhosphophylliteFlu
         if (!nbt.contains("inFluid")) {
             return;
         }
-        ResourceLocation inFluidLocation = new ResourceLocation(nbt.getString("inFluid"));
+        ResourceLocation inFluidLocation = ResourceLocation.parse(nbt.getString("inFluid"));
         if (BuiltInRegistries.FLUID.containsKey(inFluidLocation)) {
             Fluid newInFluid = BuiltInRegistries.FLUID.get(inFluidLocation);
             if (newInFluid == null) {
@@ -261,7 +261,7 @@ public class FluidTransitionTank extends HeatBody implements IPhosphophylliteFlu
             }
             List<Fluid> outFluidList = (condenser ? newTransition.liquids : newTransition.gases);
             Fluid newOutFluid = null;
-            ResourceLocation outFluidLocation = new ResourceLocation(nbt.getString("outFluid"));
+            ResourceLocation outFluidLocation = ResourceLocation.parse(nbt.getString("outFluid"));
             if (BuiltInRegistries.FLUID.containsKey(outFluidLocation)) {
                 Fluid oldOutFluid = BuiltInRegistries.FLUID.get(outFluidLocation);
                 if (outFluidList.contains(oldOutFluid)) {

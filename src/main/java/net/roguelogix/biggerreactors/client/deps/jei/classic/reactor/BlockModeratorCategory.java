@@ -23,12 +23,12 @@ import java.awt.*;
 public class BlockModeratorCategory implements IRecipeCategory<BlockModeratorCategory.Recipe> {
     private final IDrawable background;
     private final IDrawable icon;
-    public static final ResourceLocation UID = new ResourceLocation(BiggerReactors.modid, "classic/reactor_moderator_block");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "classic/reactor_moderator_block");
     public static final RecipeType<Recipe> RECIPE_TYPE = new RecipeType<>(UID, Recipe.class);
     
     public BlockModeratorCategory(IGuiHelper guiHelper) {
         icon = guiHelper.createDrawableItemStack(new ItemStack(ReactorTerminal.INSTANCE));
-        background = guiHelper.createDrawable(new ResourceLocation(BiggerReactors.modid, "textures/jei/common.png"), 0, 0, 144, 46);
+        background = guiHelper.createDrawable(ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/jei/common.png"), 0, 0, 144, 46);
     }
     
     @Override

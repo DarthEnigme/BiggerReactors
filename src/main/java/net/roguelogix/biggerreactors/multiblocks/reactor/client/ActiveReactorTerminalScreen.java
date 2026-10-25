@@ -28,7 +28,7 @@ import java.util.Objects;
 @OnlyIn(Dist.CLIENT)
 public class ActiveReactorTerminalScreen extends PhosphophylliteScreen<ReactorTerminalContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/reactor_terminal_active.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/reactor_terminal_active.png");
 
     private ReactorState reactorState;
 
@@ -43,8 +43,8 @@ public class ActiveReactorTerminalScreen extends PhosphophylliteScreen<ReactorTe
 
         // Initialize reactor state.
         reactorState = (ReactorState) this.getMenu().getGuiPacket();
-        coolantFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(reactorState.coolantResourceLocation));
-        exhaustFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(reactorState.exhaustResourceLocation));
+        coolantFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(reactorState.coolantResourceLocation));
+        exhaustFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(reactorState.exhaustResourceLocation));
     }
 
     /**
@@ -155,11 +155,11 @@ public class ActiveReactorTerminalScreen extends PhosphophylliteScreen<ReactorTe
         }
         // Check if coolant type changed.
         if (!reactorState.coolantResourceLocation.equals(Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(coolantFluid)).toString())) {
-            coolantFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(reactorState.coolantResourceLocation));
+            coolantFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(reactorState.coolantResourceLocation));
         }
         // Check if exhaust type changed.
         if (!reactorState.exhaustResourceLocation.equals(Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(exhaustFluid)).toString())) {
-            exhaustFluid = BuiltInRegistries.FLUID.get(new ResourceLocation(reactorState.exhaustResourceLocation));
+            exhaustFluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(reactorState.exhaustResourceLocation));
         }
     }
 

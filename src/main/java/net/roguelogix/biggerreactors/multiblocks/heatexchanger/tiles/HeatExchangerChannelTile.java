@@ -50,13 +50,13 @@ public class HeatExchangerChannelTile extends HeatExchangerBaseTile {
     private static Mesh evaporatorCornerMesh;
     
     private static void onQuartzStartup(QuartzEvent.Startup quartzStartup) {
-        condenserConnectionErrorMesh = Quartz.createStaticMesh(new ResourceLocation("biggerreactors:block/heat_exchanger/casing/corner"));
-        condenserStraightMesh = Quartz.createStaticMesh(new ResourceLocation("biggerreactors:block/heat_exchanger/hot_channel/connected_tb"));
-        condenserCornerMesh = Quartz.createStaticMesh(new ResourceLocation("biggerreactors:block/heat_exchanger/hot_channel/connected_bn"));
+        condenserConnectionErrorMesh = Quartz.createStaticMesh(ResourceLocation.parse("biggerreactors:block/heat_exchanger/casing/corner"));
+        condenserStraightMesh = Quartz.createStaticMesh(ResourceLocation.parse("biggerreactors:block/heat_exchanger/hot_channel/connected_tb"));
+        condenserCornerMesh = Quartz.createStaticMesh(ResourceLocation.parse("biggerreactors:block/heat_exchanger/hot_channel/connected_bn"));
         
-        evaporatorConnectionErrorMesh = Quartz.createStaticMesh(new ResourceLocation("biggerreactors:block/heat_exchanger/casing/corner"));
-        evaporatorStraightMesh = Quartz.createStaticMesh(new ResourceLocation("biggerreactors:block/heat_exchanger/cold_channel/connected_tb"));
-        evaporatorCornerMesh = Quartz.createStaticMesh(new ResourceLocation("biggerreactors:block/heat_exchanger/cold_channel/connected_bn"));
+        evaporatorConnectionErrorMesh = Quartz.createStaticMesh(ResourceLocation.parse("biggerreactors:block/heat_exchanger/casing/corner"));
+        evaporatorStraightMesh = Quartz.createStaticMesh(ResourceLocation.parse("biggerreactors:block/heat_exchanger/cold_channel/connected_tb"));
+        evaporatorCornerMesh = Quartz.createStaticMesh(ResourceLocation.parse("biggerreactors:block/heat_exchanger/cold_channel/connected_bn"));
     }
     
     private static final ReferenceArrayList<Matrix4f> rotationMatrices = new ReferenceArrayList<>();

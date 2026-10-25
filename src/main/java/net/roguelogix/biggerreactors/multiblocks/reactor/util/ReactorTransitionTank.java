@@ -1,5 +1,6 @@
 package net.roguelogix.biggerreactors.multiblocks.reactor.util;
 
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
@@ -103,7 +104,7 @@ public class ReactorTransitionTank extends FluidTransitionTank {
         return filled;
     }
     
-    public long drain(@Nonnull Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long drain(@Nonnull Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         pullUpdate();
         long drained = super.drain(fluid, tag, amount, simulate);
         if (!simulate) {

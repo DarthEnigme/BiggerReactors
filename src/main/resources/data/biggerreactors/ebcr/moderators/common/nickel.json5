@@ -1,6 +1,6 @@
 {
     type: "tag",
-    location: "forge:storage_blocks/nickel",
+    location: "c:storage_blocks/nickel",
     absorption: 0.5,
     efficiency: 0.82,
     moderation: 1.46,

@@ -22,7 +22,7 @@ public class CommonRender {
     // This is a separate atlas with textures used by several things. For example, RF and fluid level markers.
     // Gauge-specific textures should still be contained alongside the screen it's used in. If it's used in multiple
     // screens though, then it's probably a good candidate for the common texture.
-    public static final ResourceLocation COMMON_RESOURCE_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/common.png");
+    public static final ResourceLocation COMMON_RESOURCE_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/common.png");
 
     /**
      * Render an energy gauge.

@@ -1,5 +1,6 @@
 package net.roguelogix.biggerreactors.multiblocks.heatexchanger.tiles;
 
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -128,7 +129,7 @@ public class HeatExchangerFluidPortTile extends HeatExchangerBaseTile implements
     
     @Nullable
     @Override
-    public CompoundTag fluidTagInTank(int tank) {
+    public DataComponentPatch fluidTagInTank(int tank) {
         if (HETank == null) {
             return null;
         }
@@ -152,7 +153,7 @@ public class HeatExchangerFluidPortTile extends HeatExchangerBaseTile implements
     }
     
     @Override
-    public long fill(Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long fill(Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         if (HETank == null || !inlet) {
             return 0;
         }
@@ -160,7 +161,7 @@ public class HeatExchangerFluidPortTile extends HeatExchangerBaseTile implements
     }
     
     @Override
-    public long drain(Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long drain(Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         if (HETank == null || inlet) {
             return 0;
         }

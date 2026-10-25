@@ -1,3 +1,14 @@
+# 1.21.1-0.7.0-alpha.1
+
+Unofficial port to Minecraft 1.21.1 / NeoForge 21.1 (requires Phosphophyllite 0.8.0-alpha.1 and Quartz 0.3.0-alpha.1 from the same port)
+
+## Misc
+ - port to Minecraft 1.21.1 / NeoForge 21.1, Java 21, ModDevGradle
+ - forge: tags replaced with c: common tags (c:ingots/uranium, c:glass_blocks, ...)
+ - data folders renamed for 1.21 (recipe, loot_table, tags/item, ...), recipe conditions use neoforge:conditions
+ - fix GUI/registry sync packets never carrying a payload (Phosphophyllite networking)
+ - disabled cyanite reprocessor no longer breaks the mineable/pickaxe tag
+
 # 1.20.1-0.6.0-beta.10.2
 
 ## Reactor

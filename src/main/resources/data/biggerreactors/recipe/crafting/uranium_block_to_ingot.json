@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "biggerreactors:uranium_block"
+    }
+  ],
+  "result": {
+    "id": "biggerreactors:uranium_ingot",
+    "count": 9
+  }
+}

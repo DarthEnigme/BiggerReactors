@@ -24,13 +24,13 @@ import java.awt.*;
 public class FluidModeratorCategory implements IRecipeCategory<FluidModeratorCategory.Recipe> {
     private final IDrawable background;
     private final IDrawable icon;
-    public static final ResourceLocation UID = new ResourceLocation(BiggerReactors.modid, "classic/reactor_moderator_fluid");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "classic/reactor_moderator_fluid");
     public static final RecipeType<Recipe> RECIPE_TYPE = new RecipeType<>(UID, Recipe.class);
 
     
     public FluidModeratorCategory(IGuiHelper guiHelper) {
         icon = guiHelper.createDrawableItemStack(new ItemStack(ReactorTerminal.INSTANCE));
-        background = guiHelper.createDrawable(new ResourceLocation(BiggerReactors.modid, "textures/jei/common.png"), 0, 0, 144, 46);
+        background = guiHelper.createDrawable(ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/jei/common.png"), 0, 0, 144, 46);
     }
     
     @Override
@@ -56,7 +56,7 @@ public class FluidModeratorCategory implements IRecipeCategory<FluidModeratorCat
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses) {
         var slot = builder.addSlot(RecipeIngredientRole.INPUT, 1, 15);
-        slot.addFluidStack(recipe.getInput().getRawFluid(), 1000);
+        slot.addFluidStack(recipe.getInput().getFluid(), 1000);
     }
     
     @Override

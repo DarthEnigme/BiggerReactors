@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CII"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "tag": "c:ingots/cyanite"
+    }
+  },
+  "result": {
+    "id": "biggerreactors:turbine_rotor_blade"
+  }
+}

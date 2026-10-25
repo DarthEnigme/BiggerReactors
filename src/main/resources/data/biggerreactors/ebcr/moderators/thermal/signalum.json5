@@ -1,6 +1,6 @@
 {
     type: "tag",
-    location: "forge:storage_blocks/signalum",
+    location: "c:storage_blocks/signalum",
     absorption:  0.63,
     efficiency: 0.66,
     moderation: 1.5,

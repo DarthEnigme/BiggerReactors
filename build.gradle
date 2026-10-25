@@ -1,10 +1,8 @@
 plugins {
     id 'java-library'
-    id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.+'
-    id 'net.neoforged.gradle.mixin' version '7.0.+'
+    id 'net.neoforged.moddev' version '2.0.148'
 }
 
 evaluationDependsOn(':Phosphophyllite')
@@ -20,48 +18,44 @@ base {
     archivesName = "${mod_id}-${mc_version}"
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-//accessTransformers {
-//    file 'src/main/resources/META-INF/accesstransformer.cfg'
-//}
+neoForge {
+    version = neo_version
 
-runs {
-    configureEach {
-        workingDirectory project.file("run/${it.name}")
-
-        systemProperty 'forge.logging.markers', 'SCAN,REGISTRIES'
-        systemProperty 'forge.logging.console.level', 'debug'
-
-        modSource project.sourceSets.main
-        modSource project(':Quartz').sourceSets.main
-        modSource project(':Phosphophyllite').sourceSets.main
-
-        dependencies {
-            runtime("org.lwjgl:lwjgl-opencl:3.3.1") {
-                transitive(false)
-            }
-            runtime("org.lwjgl:lwjgl-vulkan:3.3.1"){
-                transitive(false)
-            }
+    mods {
+        biggerreactors {
+            sourceSet sourceSets.main
+        }
+        quartz {
+            sourceSet project(':Quartz').sourceSets.main
+        }
+        phosphophyllite {
+            sourceSet project(':Phosphophyllite').sourceSets.main
         }
     }
 
-    client {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    server {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
-    }
-
-    gameTestServer {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    data {
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    runs {
+        configureEach {
+            gameDirectory = project.file("run/${it.name}")
+            systemProperty 'forge.logging.markers', 'SCAN,REGISTRIES'
+            systemProperty 'forge.logging.console.level', 'debug'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        client {
+            client()
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+        gameTestServer {
+            type = "gameTestServer"
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
     }
 }
 
@@ -83,7 +77,7 @@ repositories {
     }
     maven {
         // computer craft
-        url 'https://squiddev.cc/maven/'
+        url 'https://maven.squiddev.cc/'
         content {
             includeGroup("cc.tweaked")
             includeModule("org.squiddev", "Cobalt")
@@ -92,39 +86,27 @@ repositories {
 }
 
 dependencies {
-    implementation "net.neoforged:neoforge:${neo_version}"
-
-    compileOnly project(':Phosphophyllite')
-    compileOnly project(':Quartz')
+    implementation project(':Phosphophyllite')
+    implementation project(':Quartz')
 
     compileOnly("cc.tweaked:cc-tweaked-${cc_mc_version}-core-api:${cc_version}")
     compileOnly("cc.tweaked:cc-tweaked-${cc_mc_version}-forge-api:${cc_version}")
-//    runtimeOnly("cc.tweaked:cc-tweaked-${cc_mc_version}-forge:${cc_version}")
 
     compileOnly("mezz.jei:jei-${jei_mc_version}-common-api:${jei_version}")
-    compileOnly("mezz.jei:jei-${jei_mc_version}-forge-api:${jei_version}")
-    // at runtime, use the full JEI jar for Forge
-//    runtimeOnly("mezz.jei:jei-${jei_mc_version}-forge:${jei_version}")
+    compileOnly("mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}")
 
-    compileOnly "mekanism:Mekanism:1.19.2-10.3.5.474:api"
+    compileOnly "mekanism:Mekanism:${mekanism_version}:api"
 
-//    runtimeOnly 'curse.maven:MEK-268560:4041164'
-//    runtimeOnly 'curse.maven:MEKG-268566:4041168'
-//    runtimeOnly 'curse.maven:COFHCore-69162:4385216'
-//    runtimeOnly 'curse.maven:ThermalFoundation-222880:4382373'
-//    runtimeOnly 'curse.maven:ThermalExpansion-69163:4382371'
-//    runtimeOnly 'curse.maven:ThermalDynamics-227443:4391160'
-
-//    runtimeOnly 'curse.maven:Rubidium-574856:4448157'
-//    runtimeOnly 'curse.maven:Oculus-581495:4578741'
-
-//    runtimeOnly 'curse.maven:WorldStripper-250603:3545856')
-//    runtimeOnly 'curse.maven:CW-399558:3926815')
-
-    compileOnly("org.lwjgl:lwjgl-opencl:3.3.1") {
+    compileOnly("org.lwjgl:lwjgl-opencl:${lwjgl_version}") {
         transitive(false)
     }
-    compileOnly("org.lwjgl:lwjgl-vulkan:3.3.1"){
+    compileOnly("org.lwjgl:lwjgl-vulkan:${lwjgl_version}") {
+        transitive(false)
+    }
+    clientAdditionalRuntimeClasspath("org.lwjgl:lwjgl-opencl:${lwjgl_version}") {
+        transitive(false)
+    }
+    clientAdditionalRuntimeClasspath("org.lwjgl:lwjgl-vulkan:${lwjgl_version}") {
         transitive(false)
     }
 }
@@ -157,7 +139,7 @@ gradle.projectsEvaluated {
         ]
         inputs.properties replaceProperties
 
-        filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
             expand replaceProperties + [project: project]
         }
     }
@@ -175,11 +157,6 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
-}
-
-tasks.named('publish').configure {
-    dependsOn 'reobfJar'
-    mustRunAfter 'reobfJar'
 }
 
 tasks.register('sourcesJar', Jar) {
@@ -206,22 +183,7 @@ publishing {
     }
 }
 
-// NeoGradle bug, this works around it
-gradle.projectsEvaluated {
-    var subProjects = List.of(project.project(':Quartz'), project.project(':Phosphophyllite'))
-
-    var neoFormJoinDownloadAssetsTaskName = null
-    for (final def taskName in project.tasks.getNames()) {
-        if (taskName.contains("neoFormJoined") && taskName.contains("DownloadAssets")) {
-            neoFormJoinDownloadAssetsTaskName = taskName
-            break
-        }
-    }
-
-    var lastTask = project.tasks.getByPath(neoFormJoinDownloadAssetsTaskName)
-    for (final def subProject in subProjects) {
-        var nextTask = subProject.tasks.getByPath(neoFormJoinDownloadAssetsTaskName);
-        lastTask.mustRunAfter(nextTask)
-        lastTask = nextTask
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.addAll(['-Xmaxerrs', '5000'])
 }

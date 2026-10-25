@@ -8,7 +8,7 @@
     // resource location type
     gasType: "tag",
     // resource location
-    gas: "forge:superheated_sodium",
+    gas: "c:superheated_sodium",
     // thermal conductivity, in watts per metre-kelvin
     gasThermalConductivity: 1.2,
     // latent heat of vaporization, in rf/mb

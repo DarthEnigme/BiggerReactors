@@ -1,0 +1,17 @@
+{
+  "type": "mekanism:crushing",
+  "neoforge:conditions": [
+    {
+      "modid": "mekanism",
+      "type": "neoforge:mod_loaded"
+    }
+  ],
+  "input": {
+    "count": 1,
+    "item": "biggerreactors:cyanite_ingot"
+  },
+  "output": {
+    "count": 1,
+    "id": "biggerreactors:cyanite_dust"
+  }
+}

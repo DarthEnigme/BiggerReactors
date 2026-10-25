@@ -128,12 +128,12 @@ public class FluidTransitionRegistry {
         @ConfigValue
         public RegistryType liquidType = RegistryType.tag;
         @ConfigValue
-        public ResourceLocation liquid = new ResourceLocation("dirt");
+        public ResourceLocation liquid = ResourceLocation.parse("dirt");
         
         @ConfigValue
         public RegistryType gasType = RegistryType.tag;
         @ConfigValue
-        public ResourceLocation gas = new ResourceLocation("dirt");
+        public ResourceLocation gas = ResourceLocation.parse("dirt");
     
         @ConfigValue(range = "(0,)")
         public double latentHeat;
@@ -158,7 +158,7 @@ public class FluidTransitionRegistry {
         liquidTransitions.clear();
         gasTransitions.clear();
         
-        final List<FluidTransitionJsonData> data = loader.loadAll(new ResourceLocation("biggerreactors:transitions"));
+        final List<FluidTransitionJsonData> data = loader.loadAll(ResourceLocation.parse("biggerreactors:transitions"));
         BiggerReactors.LOGGER.info("Loaded " + data.size() + " transitions data entries");
         
         for (FluidTransitionJsonData transitionData : data) {

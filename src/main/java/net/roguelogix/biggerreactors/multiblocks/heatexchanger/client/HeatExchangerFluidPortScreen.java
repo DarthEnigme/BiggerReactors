@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class HeatExchangerFluidPortScreen extends PhosphophylliteScreen<HeatExchangerFluidPortContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/heat_exchanger_fluid_port.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/heat_exchanger_fluid_port.png");
 
     private HeatExchangerFluidPortState heatExchangerFluidPortState;
 

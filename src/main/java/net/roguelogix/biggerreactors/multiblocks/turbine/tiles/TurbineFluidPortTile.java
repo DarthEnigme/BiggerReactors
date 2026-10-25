@@ -1,6 +1,6 @@
 package net.roguelogix.biggerreactors.multiblocks.turbine.tiles;
 
-import mekanism.api.chemical.gas.IGasHandler;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,7 +23,6 @@ import net.roguelogix.biggerreactors.multiblocks.turbine.state.TurbineFluidPortS
 import net.roguelogix.phosphophyllite.fluids.FluidHandlerWrapper;
 import net.roguelogix.phosphophyllite.fluids.IPhosphophylliteFluidHandler;
 import net.roguelogix.phosphophyllite.client.gui.api.IHasUpdatableState;
-import net.roguelogix.phosphophyllite.fluids.MekanismGasWrappers;
 import net.roguelogix.phosphophyllite.multiblock.common.IEventMultiblock;
 import net.roguelogix.phosphophyllite.multiblock.validated.IValidatedMultiblock;
 import net.roguelogix.phosphophyllite.registry.CapabilityRegistration;
@@ -92,7 +91,7 @@ public class TurbineFluidPortTile extends TurbineBaseTile implements IPhosphophy
     
     @Nullable
     @Override
-    public CompoundTag fluidTagInTank(int tank) {
+    public DataComponentPatch fluidTagInTank(int tank) {
         if (transitionTank == null) {
             return null;
         }
@@ -116,7 +115,7 @@ public class TurbineFluidPortTile extends TurbineBaseTile implements IPhosphophy
     }
     
     @Override
-    public long fill(Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long fill(Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         if (transitionTank == null || direction != INLET) {
             return 0;
         }
@@ -124,7 +123,7 @@ public class TurbineFluidPortTile extends TurbineBaseTile implements IPhosphophy
     }
     
     @Override
-    public long drain(Fluid fluid, @Nullable CompoundTag tag, long amount, boolean simulate) {
+    public long drain(Fluid fluid, @Nullable DataComponentPatch tag, long amount, boolean simulate) {
         if (transitionTank == null || direction == INLET) {
             return 0;
         }

@@ -50,8 +50,8 @@ public class ReactorAccessPortTile extends ReactorBaseTile implements IItemHandl
     @RegisterCapability
     private static final CapabilityRegistration ITEM_HANDLER_CAP_REGISTRATION = CapabilityRegistration.tileCap(Capabilities.ItemHandler.BLOCK, ReactorAccessPortTile.class);
     
-    private static final TagKey<Item> uraniumIngotTag = TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation("forge:ingots/uranium"));
-    private static final TagKey<Item> uraniumBlockTag = TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation("forge:storage_blocks/uranium"));
+    private static final TagKey<Item> uraniumIngotTag = TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.parse("c:ingots/uranium"));
+    private static final TagKey<Item> uraniumBlockTag = TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.parse("c:storage_blocks/uranium"));
     
     public static final int FUEL_SLOT = 0;
     public static final int WASTE_SLOT = 1;

@@ -1,6 +1,6 @@
 {
     type: "tag",
-    location: "forge:storage_blocks/silver",
+    location: "c:storage_blocks/silver",
     absorption: 0.51,
     efficiency: 0.79,
     moderation: 1.43,

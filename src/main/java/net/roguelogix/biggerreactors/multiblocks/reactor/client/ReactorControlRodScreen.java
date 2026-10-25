@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class ReactorControlRodScreen extends PhosphophylliteScreen<ReactorControlRodContainer> {
 
-    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/reactor_control_rod.png");
+    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/reactor_control_rod.png");
 
     private ReactorControlRodState reactorControlRodState;
 

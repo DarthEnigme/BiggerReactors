@@ -1,6 +1,6 @@
 {
     type: "fluidtag",
-    location: "forge:redstone",
+    location: "c:redstone",
     absorption: 0.75,
     efficiency: 0.55,
     moderation: 1.6,

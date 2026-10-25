@@ -64,7 +64,7 @@ public class TurbineCoilRegistry {
         RegistryType type = RegistryType.tag;
         
         @ConfigValue
-        ResourceLocation location = new ResourceLocation("dirt");
+        ResourceLocation location = ResourceLocation.parse("dirt");
     
         @ConfigValue(range = "(0,)")
         double efficiency;
@@ -82,7 +82,7 @@ public class TurbineCoilRegistry {
         BiggerReactors.LOGGER.info("Loading turbine coils");
         registry.clear();
         
-        List<TurbineCoilJsonData> data = dataLoader.loadAll(new ResourceLocation("biggerreactors:ebest/coils"));
+        List<TurbineCoilJsonData> data = dataLoader.loadAll(ResourceLocation.parse("biggerreactors:ebest/coils"));
         BiggerReactors.LOGGER.info("Loaded " + data.size() + " coil data entries");
         
         for (TurbineCoilJsonData coilData : data) {
@@ -109,7 +109,7 @@ public class TurbineCoilRegistry {
     
     public static class Client {
         
-        private static final SimplePhosChannel CHANNEL = new SimplePhosChannel(new ResourceLocation(BiggerReactors.modid, "coil_sync_channel"), Client::readSync, null);
+        private static final SimplePhosChannel CHANNEL = new SimplePhosChannel(ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "coil_sync_channel"), Client::readSync, null);
         private static final ObjectOpenHashSet<Block> coilBlocks = new ObjectOpenHashSet<>();
         private static final Object2ObjectOpenHashMap<Block, CoilData> coilProperties = new Object2ObjectOpenHashMap<>();
         
@@ -166,7 +166,7 @@ public class TurbineCoilRegistry {
             for (int i = 0; i < list.size(); i++) {
                 var value = list.get(i);
                 var properties = propertiesList.get(i);
-                final var block = BuiltInRegistries.BLOCK.get(new ResourceLocation(value));
+                final var block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(value));
                 if (block == null) {
                     return;
                 }

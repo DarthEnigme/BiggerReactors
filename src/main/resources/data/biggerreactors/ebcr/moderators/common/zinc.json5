@@ -1,6 +1,6 @@
 {
     type: "tag",
-    location: "forge:storage_blocks/zinc",
+    location: "c:storage_blocks/zinc",
     absorption: 0.51,
     efficiency: 0.77,
     moderation: 1.41,

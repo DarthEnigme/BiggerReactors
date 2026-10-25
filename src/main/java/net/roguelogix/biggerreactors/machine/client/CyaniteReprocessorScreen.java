@@ -19,7 +19,7 @@
 //
 //public class CyaniteReprocessorScreen extends PhosphophylliteScreen<CyaniteReprocessorContainer> {
 //
-//    private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BiggerReactors.modid, "textures/screen/cyanite_reprocessor.png");
+//    private static final ResourceLocation DEFAULT_TEXTURE = ResourceLocation.fromNamespaceAndPath(BiggerReactors.modid, "textures/screen/cyanite_reprocessor.png");
 //
 //    private CyaniteReprocessorState cyaniteReprocessorState;
 //
